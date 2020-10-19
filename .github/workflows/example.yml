@@ -16,9 +16,6 @@ jobs:
       - name: "Set default PHP version"
         run: "sudo update-alternatives --set php /usr/bin/php${{ matrix.php-version }}"
 
-      - name: "Install dirmgr for PHIVE"
-        run: "dpkg -l dirmngr || sudo apt-get install -y dirmngr"
-
       - name: "Checkout code"
         uses: "actions/checkout@v2"
 
@@ -34,6 +31,9 @@ jobs:
         with:
           home: "~/.phive"
           binPath: "${{ github.workspace }}/tools/phive"
+
+      - name: "Display PHIVE version"
+        run: "tools/phive version"
 
       - name: "Install PHP tools with PHIVE"
         uses: "szepeviktor/phive-install@v1"
