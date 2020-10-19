@@ -33,7 +33,7 @@ jobs:
           binPath: "${{ github.workspace }}/tools/phive"
 
       - name: "Manually install phpunit v8"
-        run: "tools/phive 'phpunit:^8.5.8'"
+        run: "tools/phive install 'phpunit:^8.5.8' --trust-gpg-keys D8406D0D82947747293778314AA394086372C20A"
 
       - name: "Install PHP tools with PHIVE"
         uses: "szepeviktor/phive-install@v1"
