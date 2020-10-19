@@ -16,6 +16,9 @@ jobs:
       - name: "Set default PHP version"
         run: "sudo update-alternatives --set php /usr/bin/php${{ matrix.php-version }}"
 
+      - name: "debug"
+        run: "gpg --version; dpkg -l | grep gpg"
+
       - name: "Checkout code"
         uses: "actions/checkout@v2"
 
