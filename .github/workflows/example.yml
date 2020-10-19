@@ -17,7 +17,7 @@ jobs:
         run: "sudo update-alternatives --set php /usr/bin/php${{ matrix.php-version }}"
 
       - name: "debug"
-        run: "gpg --version; dpkg -l | grep gpg"
+        run: "dpkg -l | grep dirmgr || true; apt-get install -y dirmgr"
 
       - name: "Checkout code"
         uses: "actions/checkout@v2"
