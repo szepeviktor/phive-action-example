@@ -6,6 +6,9 @@ on:
 
 env:
   phiveHome: "$HOME/.phive"
+  phiveHome2: $HOME/.phive
+  phiveHome3: $HOME
+  phiveHome4: ~
 
 jobs:
   phive:
@@ -16,6 +19,9 @@ jobs:
           - "7.4"
           - "7.3"
     steps:
+      - name: "See!"
+        run: "echo ${{ env.phiveHome }},${{ env.phiveHome2 }},${{ env.phiveHome3 }},${{ env.phiveHome4 }}"
+
       - name: "Set default PHP version"
         run: "sudo update-alternatives --set php /usr/bin/php${{ matrix.php-version }}"
 
@@ -25,7 +31,7 @@ jobs:
       - name: "Cache tools installed with PHIVE"
         uses: "actions/cache@v2.1.2"
         with:
-          path: "~/.phive"
+          path: "${{ env.phiveHome }}"
           key: "php-${{ matrix.php-version }}-phive-${{ hashFiles('.phive/phars.xml') }}"
           restore-keys: "php-${{ matrix.php-version }}-phive-"
 
