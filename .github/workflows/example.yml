@@ -1,4 +1,9 @@
-# Run PHIVE in GitHub Actions
+name: "Run PHIVE in GitHub Actions"
+
+on:
+  - "push"
+  - "pull_request"
+
 jobs:
   phive:
     runs-on: ubuntu-latest
