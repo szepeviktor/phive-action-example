@@ -32,8 +32,8 @@ jobs:
           home: "~/.phive"
           binPath: "${{ github.workspace }}/tools/phive"
 
-      - name: "Display PHIVE version"
-        run: "tools/phive version"
+      - name: "Manually install phpunit v8"
+        run: "tools/phive 'phpunit:^8.5.8'"
 
       - name: "Install PHP tools with PHIVE"
         uses: "szepeviktor/phive-install@v1"
