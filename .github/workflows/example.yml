@@ -17,7 +17,7 @@ jobs:
         run: "sudo update-alternatives --set php /usr/bin/php${{ matrix.php-version }}"
 
       - name: "Install dirmgr for PHIVE"
-        run: "sudo apt-get install -y dirmgr"
+        run: "dpkg -l dirmngr || sudo apt-get install -y dirmngr"
 
       - name: "Checkout code"
         uses: "actions/checkout@v2"
