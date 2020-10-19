@@ -4,12 +4,6 @@ on:
   - "push"
   - "pull_request"
 
-env:
-  phiveHome: "$HOME/.phive"
-  phiveHome2: "$HOME/.phive"
-  phiveHome3: "$HOME"
-  phiveHome4: "~"
-
 jobs:
   phive:
     runs-on: ubuntu-latest
@@ -19,9 +13,6 @@ jobs:
           - "7.4"
           - "7.3"
     steps:
-      - name: "See!"
-        run: "set; echo '${{ env.phiveHome }},${{ env.phiveHome2 }},${{ env.phiveHome3 }},${{ env.phiveHome4 }}'"
-
       - name: "Set default PHP version"
         run: "sudo update-alternatives --set php /usr/bin/php${{ matrix.php-version }}"
 
@@ -31,23 +22,20 @@ jobs:
       - name: "Cache tools installed with PHIVE"
         uses: "actions/cache@v2.1.2"
         with:
-          path: "${{ env.phiveHome }}"
+          path: "${{ runner.temp }}/.phive"
           key: "php-${{ matrix.php-version }}-phive-${{ hashFiles('.phive/phars.xml') }}"
           restore-keys: "php-${{ matrix.php-version }}-phive-"
 
       - name: "Install PHIVE"
         uses: "szepeviktor/phive@v1"
         with:
-          home: "${{ env.phiveHome }}"
+          home: "${{ runner.temp }}/.phive"
           binPath: "${{ github.workspace }}/tools/phive"
-
-      - name: "Manually install phpunit v8"
-        run: "tools/phive install 'phpunit:^8.5.8' --trust-gpg-keys 4AA394086372C20A"
 
       - name: "Install PHP tools with PHIVE"
         uses: "szepeviktor/phive-install@v1"
         with:
-          home: "${{ env.phiveHome }}"
+          home: "${{ runner.temp }}/.phive"
           binPath: "${{ github.workspace }}/tools/phive"
           trustGpgKeys: "4AA394086372C20A,CF1A108D0E7AE720,E82B2FB314E9906E"
 
