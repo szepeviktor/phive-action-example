@@ -24,12 +24,12 @@ jobs:
         uses: "actions/checkout@v2"
 
       - name: "Cache tools installed with PHIVE"
-        uses: "actions/cache@v2.1.2"
+        uses: "actions/cache@v2"
         with:
           #path: "${{ runner.temp }}/.phive"
           path: "${{ steps.determine-phive.outputs.home }}"
-          key: "php-${{ matrix.php-version }}-phive-${{ hashFiles('.phive/phars.xml') }}"
-          restore-keys: "php-${{ matrix.php-version }}-phive-"
+          key: "phive-${{ matrix.php-version }}-phar-${{ hashFiles('.phive/phars.xml') }}"
+          restore-keys: "phive-${{ matrix.php-version }}-phar-"
 
       - name: "Install PHIVE"
         uses: "szepeviktor/phive@v1"
